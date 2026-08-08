@@ -25,7 +25,7 @@ export default defineConfig({
           '流盾 WAF,Flow Shield WAF,WAF,Web应用防火墙,CC防护,OpenResty,反向代理,流量防护,Docker'
       }
     ],
-    ['meta', { name: 'author', content: 'Flow Shield WAF' }],
+    ['meta', { name: 'author', content: '老唐' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
     ['meta', { property: 'og:site_name', content: siteName }],
@@ -158,7 +158,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Released under PolyForm Noncommercial 1.0.0',
-      copyright: 'Copyright © Flow Shield WAF'
+      copyright: 'Copyright © 老唐'
     },
     outline: {
       label: '本页目录',

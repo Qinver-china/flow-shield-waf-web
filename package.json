@@ -9,7 +9,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "老唐",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
