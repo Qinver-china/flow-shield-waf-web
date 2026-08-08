@@ -157,8 +157,8 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/Qinver-china/flow-shield-waf' }
     ],
     footer: {
-      message: 'Released under PolyForm Noncommercial 1.0.0',
-      copyright: 'Copyright © Flow Shield WAF & <a href="https://zibll.com" target="_blank">zibll.com</a>'
+      message: '流盾 WAF · 守住每一次真实访问',
+      copyright: 'Copyright © Flow Shield WAF & <a href="https://zibll.com" target="_blank">zibll.com</a> All rights reserved.'
     },
     outline: {
       label: '本页目录',

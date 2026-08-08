@@ -54,10 +54,19 @@ function toneClass(index: number) {
               <circle cx="4.5" cy="18" r="1.4" fill="currentColor" />
             </svg>
             <svg v-else-if="card.icon === 'ai'" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3c-2.8 3.2-4.5 5.9-4.5 8.6a4.5 4.5 0 0 0 9 0C16.5 8.9 14.8 6.2 12 3Z" stroke="currentColor"
-                stroke-width="1.7" stroke-linejoin="round" />
-              <path d="M9.5 14.5c.6 1.4 1.5 2.3 2.5 3 1-.7 1.9-1.6 2.5-3" stroke="currentColor" stroke-width="1.7"
-                stroke-linecap="round" />
+              <!-- AI 星芒：主星 + 辅星 -->
+              <path
+                d="M12 2.5 13.35 8.2a1.2 1.2 0 0 0 .85.85L20 10.4l-5.8 1.35a1.2 1.2 0 0 0-.85.85L12 18.3l-1.35-5.7a1.2 1.2 0 0 0-.85-.85L4 10.4l5.8-1.35a1.2 1.2 0 0 0 .85-.85L12 2.5Z"
+                stroke="currentColor"
+                stroke-width="1.55"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M18.4 15.2 19 17.5l2.3.6-2.3.6-.6 2.3-.6-2.3-2.3-.6 2.3-.6.6-2.3Z"
+                stroke="currentColor"
+                stroke-width="1.45"
+                stroke-linejoin="round"
+              />
             </svg>
             <svg v-else-if="card.icon === 'deploy'" viewBox="0 0 24 24" fill="none">
               <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"

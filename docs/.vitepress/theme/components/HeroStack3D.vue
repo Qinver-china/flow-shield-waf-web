@@ -1,28 +1,41 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
+import HeroMarkSvg from './HeroMarkSvg.vue'
 
 const props = defineProps<{
   /** 鼠标跟随作用范围；首页传入整个 .fs-home-hero */
   trackEl?: HTMLElement | null
 }>()
 
-/** 替换同路径文件即可换图；也可改成 .png */
-const images = [
-  { src: '/images/hero/hero-1.png', alt: '流盾 WAF 界面' }
-] as const
-
 const root = ref<HTMLElement | null>(null)
 const stageEl = ref<HTMLElement | null>(null)
+const markRef = ref<{
+  setParallax: (nx: number, ny: number, active: boolean) => void
+} | null>(null)
+
 const reduceMotion = ref(false)
 const active = ref(false)
 
-const maxTilt = 12
+const maxTilt = 10
+/** 跟随时略快，回弹时稍慢，手感更顺 */
+const LERP_FOLLOW = 0.14
+const LERP_RETURN = 0.08
+const SETTLE = 0.001
+
 let trackTarget: HTMLElement | null = null
 let rect = { left: 0, top: 0, width: 1, height: 1 }
-let pendingX = 0
-let pendingY = 0
-let rafId = 0
 let resizeObserver: ResizeObserver | null = null
+
+let targetRx = 0
+let targetRy = 0
+let targetNx = 0
+let targetNy = 0
+let curRx = 0
+let curRy = 0
+let curNx = 0
+let curNy = 0
+let loopRaf = 0
+let pointerInside = false
 
 function cacheRect() {
   if (!trackTarget) return
@@ -30,58 +43,85 @@ function cacheRect() {
   rect = { left: r.left, top: r.top, width: r.width || 1, height: r.height || 1 }
 }
 
-function applyTransform(rx: number, ry: number) {
+function applyStage(rx: number, ry: number) {
   const el = stageEl.value
   if (!el) return
-  // translateZ(0) 促发合成层；整段 transform 只走 GPU
   el.style.transform = `translate3d(0,0,0) rotateX(${rx}deg) rotateY(${ry}deg)`
 }
 
-function flush() {
-  rafId = 0
-  applyTransform(pendingX, pendingY)
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t
 }
 
-function schedule(rx: number, ry: number) {
-  pendingX = rx
-  pendingY = ry
-  if (rafId) return
-  rafId = requestAnimationFrame(flush)
+function nearlyZero(...vals: number[]) {
+  return vals.every((v) => Math.abs(v) < SETTLE)
+}
+
+function tick() {
+  if (reduceMotion.value) {
+    loopRaf = 0
+    return
+  }
+
+  const k = pointerInside ? LERP_FOLLOW : LERP_RETURN
+  curRx = lerp(curRx, targetRx, k)
+  curRy = lerp(curRy, targetRy, k)
+  curNx = lerp(curNx, targetNx, k)
+  curNy = lerp(curNy, targetNy, k)
+
+  if (!pointerInside && nearlyZero(curRx, curRy, curNx, curNy, targetRx, targetRy)) {
+    curRx = curRy = curNx = curNy = 0
+    targetRx = targetRy = targetNx = targetNy = 0
+    applyStage(0, 0)
+    markRef.value?.setParallax(0, 0, false)
+    active.value = false
+    loopRaf = 0
+    return
+  }
+
+  applyStage(curRx, curRy)
+  markRef.value?.setParallax(curNx, curNy, pointerInside || !nearlyZero(curNx, curNy))
+  active.value = pointerInside || !nearlyZero(curRx, curRy, curNx, curNy)
+  loopRaf = requestAnimationFrame(tick)
+}
+
+function ensureLoop() {
+  if (reduceMotion.value || loopRaf) return
+  loopRaf = requestAnimationFrame(tick)
 }
 
 function onPointerMove(e: PointerEvent) {
   if (reduceMotion.value || !trackTarget) return
 
-  const px = (e.clientX - rect.left) / rect.width - 0.5
-  const py = (e.clientY - rect.top) / rect.height - 0.5
-  const ry = px * maxTilt * 2
-  const rx = -py * maxTilt * 2
-
-  if (!active.value) {
-    active.value = true
-    cacheRect()
-  }
-
-  schedule(rx, ry)
+  const nx = (e.clientX - rect.left) / rect.width - 0.5
+  const ny = (e.clientY - rect.top) / rect.height - 0.5
+  targetNx = nx
+  targetNy = ny
+  targetRy = nx * maxTilt * 2
+  targetRx = -ny * maxTilt * 2
+  pointerInside = true
+  active.value = true
+  ensureLoop()
 }
 
 function onPointerEnter() {
   cacheRect()
+  pointerInside = true
+  active.value = true
+  ensureLoop()
 }
 
 function onPointerLeave() {
-  active.value = false
-  if (rafId) {
-    cancelAnimationFrame(rafId)
-    rafId = 0
-  }
-  pendingX = 0
-  pendingY = 0
-  applyTransform(0, 0)
+  pointerInside = false
+  targetRx = 0
+  targetRy = 0
+  targetNx = 0
+  targetNy = 0
+  ensureLoop()
 }
 
 function onScrollOrResize() {
-  if (active.value) cacheRect()
+  if (pointerInside || active.value) cacheRect()
 }
 
 function unbindTrack() {
@@ -126,7 +166,7 @@ watch(
 )
 
 onUnmounted(() => {
-  if (rafId) cancelAnimationFrame(rafId)
+  if (loopRaf) cancelAnimationFrame(loopRaf)
   unbindTrack()
   window.removeEventListener('scroll', onScrollOrResize)
   window.removeEventListener('resize', onScrollOrResize)
@@ -134,13 +174,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="root" class="hero-stack" :class="{ 'is-active': active, 'is-static': reduceMotion }">
+  <div
+    ref="root"
+    class="hero-stack"
+    :class="{ 'is-active': active, 'is-static': reduceMotion }"
+  >
     <div class="hero-stack__glow" aria-hidden="true" />
     <div ref="stageEl" class="hero-stack__stage">
-      <figure v-for="(image, index) in images" :key="image.src" class="hero-stack__card"
-        :class="`hero-stack__card--${index}`">
-        <img :src="image.src" :alt="image.alt" loading="eager" decoding="async" />
-      </figure>
+      <HeroMarkSvg ref="markRef" :reduce-motion="reduceMotion" />
     </div>
   </div>
 </template>
@@ -149,9 +190,12 @@ onUnmounted(() => {
 .hero-stack {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 460px;
   margin: 0 auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   perspective: 900px;
   perspective-origin: 50% 50%;
   touch-action: pan-y;
@@ -162,7 +206,7 @@ onUnmounted(() => {
 
 .hero-stack__glow {
   position: absolute;
-  inset: 12% 8%;
+  inset: 8% 6%;
   border-radius: 50%;
   background-image: var(--vp-home-hero-image-background-image);
   filter: var(--vp-home-hero-image-filter);
@@ -170,8 +214,11 @@ onUnmounted(() => {
   pointer-events: none;
   z-index: 0;
   transform: translate3d(0, 0, 0);
-  will-change: auto;
   contain: strict;
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    background 0.45s ease;
 }
 
 .hero-stack__stage {
@@ -179,79 +226,36 @@ onUnmounted(() => {
   z-index: 1;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform: translate3d(0, 0, 0);
   transform-style: preserve-3d;
   transform-origin: center center;
   backface-visibility: hidden;
   will-change: transform;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* 跟随中取消过渡，直接上合成层变换，避免过渡插值抢帧 */
-.hero-stack.is-active .hero-stack__stage {
-  transition: none;
 }
 
 .hero-stack.is-static .hero-stack__stage {
   transform: none !important;
-  transition: none;
   will-change: auto;
-}
-
-.hero-stack__card {
-  position: absolute;
-  margin: 0;
-  width: 72%;
-  border-radius: 14px;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-  /* 静态错位用独立合成层，避免跟随时整树重绘 */
-  will-change: transform;
-}
-
-.hero-stack__card img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-user-drag: none;
-  user-select: none;
-}
-
-.hero-stack__card--0 {
-  top: 8%;
-  left: 4%;
-  z-index: 1;
-}
-
-.hero-stack__card--1 {
-  top: 18%;
-  left: 16%;
-  z-index: 2;
-  transform: translate3d(0, 0, 0) rotate(2deg);
-}
-
-.hero-stack__card--2 {
-  top: 28%;
-  left: 28%;
-  z-index: 3;
-  transform: translate3d(0, 0, 48px) rotate(6deg);
 }
 
 @media (max-width: 959px) {
   .hero-stack {
-    max-width: 420px;
+    max-width: 340px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-stack__stage,
-  .hero-stack__card {
+  .hero-stack__glow {
     transition: none !important;
   }
 
+  .hero-stack.is-active .hero-stack__glow {
+    filter: var(--vp-home-hero-image-filter);
+    opacity: 0.85;
+    background-image: var(--vp-home-hero-image-background-image);
+  }
 }
 </style>
