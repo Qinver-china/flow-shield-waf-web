@@ -158,7 +158,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Released under PolyForm Noncommercial 1.0.0',
-      copyright: 'Copyright © Flow Shield WAF & zibll'
+      copyright: 'Copyright © Flow Shield WAF & <a href="https://zibll.com" target="_blank">zibll.com</a>'
     },
     outline: {
       label: '本页目录',
