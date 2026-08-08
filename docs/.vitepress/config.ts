@@ -64,9 +64,19 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/guide/what-is-flow-shield' },
-      { text: '快速开始', link: '/guide/quick-start' }
+      { text: '快速开始', link: '/guide/quick-start' },
+      { text: '更新日志', link: '/changelog' }
     ],
     sidebar: {
+      '/changelog': [
+        {
+          text: '发布说明',
+          items: [
+            { text: '更新日志', link: '/changelog' },
+            { text: '升级与备份', link: '/guide/upgrade-backup' }
+          ]
+        }
+      ],
       '/guide/': [
         {
           text: '简介与概览',
@@ -82,7 +92,8 @@ export default defineConfig({
             { text: '常规服务器部署', link: '/guide/deploy-server' },
             { text: 'Docker 部署详解', link: '/guide/deploy-docker' },
             { text: '宝塔部署', link: '/guide/baota' },
-            { text: '升级与备份', link: '/guide/upgrade-backup' }
+            { text: '升级与备份', link: '/guide/upgrade-backup' },
+            { text: '更新日志', link: '/changelog' }
           ]
         },
         {

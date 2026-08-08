@@ -90,6 +90,8 @@ docker compose up -d --build app
 - 有流量时日志里能看到记录
 - `.env` 密钥没被误改
 
+各版本具体改了什么，见 [更新日志](/changelog)。
+
 ::: danger
 `./scripts/fresh-start.sh` 会清空数据，只适合测试环境。
 :::
