@@ -33,14 +33,15 @@
 | 分类 | 含义 |
 |------|------|
 | 搜索引擎 | Google、Bing、百度等 |
-| 监控探测 | UptimeRobot 等 |
+| 探测平台 | UptimeRobot、SEO 探测等 |
 | 社交平台 | 社交预览爬虫 |
-| SEO 工具 | SEO 类 |
-| 通用爬虫 | scraper |
+| 爬虫程序 | curl、各类 HTTP 库 / 通用爬虫 |
 | 恶意 Bot | 明确恶意 |
-| 其他 | 系统预留 |
+| AI工具 | GPTBot、Claudebot 等（可自建） |
+| 内部程序 | 站点自身回调类 UA（可自建） |
+| 其他 | 系统预留兜底 |
 
-内置里常见：Googlebot、Bingbot、百度、搜狗、Bytespider、社交预览、UptimeRobot、curl、python-requests 等。
+首次安装会预置较完整的 Bot 档案（搜索引擎、社交、探测、爬虫、AI 等）；可按需增删改，不需要的禁用即可。
 
 ## 分类管理
 
