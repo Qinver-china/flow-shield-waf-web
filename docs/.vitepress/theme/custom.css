@@ -172,6 +172,17 @@ body::before {
 .VPNavBarTitle .logo {
     height: 36px;
     width: auto;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.VPNavBarTitle .logo.VPImage,
+.VPNavBarTitle img.VPImage.logo,
+.VPNavBarTitle .VPImage.dark,
+.VPNavBarTitle .VPImage.light {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* 自定义 HomeHero 已接管首页 Hero，隐藏默认 VPHomeHero 避免双份渲染 */
