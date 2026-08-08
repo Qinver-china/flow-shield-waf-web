@@ -10,6 +10,7 @@
 ## 1. 下载并改配置
 
 ```bash
+# 在宝塔左侧菜单栏打开终端，依次输入以下命令：
 cd /www/wwwroot
 git clone https://github.com/Qinver-china/flow-shield-waf.git
 cd flow-shield-waf
@@ -42,30 +43,24 @@ netstat -tlnp | grep -E ':80 |:443 '
 
 ### (a) 方案 1：本机已安装 Nginx（含宝塔 Nginx）
 
-宝塔默认会用 Nginx 托管网站，通常已占用 80 / 443。需要把 **Nginx / 宝塔下所有网站** 的监听端口都改成其他端口（例如 `8080` / `8443`），把 80 / 443 留给流盾。
+宝塔默认会用 Nginx 托管网站，通常已占用 80 / 443。需要把 **Nginx / 宝塔下所有网站** 的监听端口都改成其他端口（例如 `8088` / `4433`），把 80 / 443 留给流盾。
 
 常见改法（宝塔面板）：
 
 1. 打开宝塔 → **网站**，逐个站点进入设置
-2. 把 HTTP / HTTPS 监听端口改为高位端口（如 `8080` / `8443`）
+2. 把 HTTP / HTTPS 监听端口改为高位端口（如 `8088` / `4433`）
 3. 保存后确认 Nginx 已重载
 
-或在服务器上直接改 Nginx 配置（常见路径如 `/www/server/panel/vhost/nginx/`），把各站点里的 `listen 80;`、`listen 443 ssl;` 等改成新端口，然后：
+或在服务器上直接改 Nginx 配置（常见路径如 `/www/server/panel/vhost/nginx/`），把各站点里的 `listen 80;`、`listen 443 ssl;` 等改成新端口，然后重启nginx服务：
+
+![宝塔修改nginx端口](/images/baota-port-edit.png)
 
 ```bash
+# 重启nginx服务的命令
 nginx -t && nginx -s reload
 ```
 
-改完后，流盾面板里配置站点回源时：
-
-- 地址：常用 `host.docker.internal` 或 `172.17.0.1`
-- HTTP 端口：填宝塔 / Nginx 的新端口（例如 `8088`），而不是 80 / 443
-
-::: tip
-- **推荐**：对外只让流盾接 80 / 443，宝塔网站全部改到高位端口，流盾再回源到这些端口  
-- **只保护部分站**：仅把被保护站点的回源指到宝塔对应高位端口  
-更完整的共存思路见 [CDN / 宝塔共存](./practice-cdn-baota.md)。
-:::
+改完后，记住刚刚改的 HTTP 和 HTTPS 端口分别是多少，最后我们部署完成之后，在流盾 WAF 后台添加站点的时候，就填写改之后的端口。
 
 ## 3. 启动
 
@@ -81,13 +76,14 @@ bash deploy/baota/install.sh
 docker compose up -d --build
 ```
 
-## 4. 登录
+## 4. 登录并添加网站
 
 - 面板地址：`http://<服务器IP>:9000`
 - 账号密码：`.env` 里的 `WAF_ADMIN_USER` / `WAF_ADMIN_PASSWORD`
-- 站点配好后，把域名解析到本机
 
-接着按 [接入第一个站点](./first-site.md) 做证书和回源。
+接着按 [接入第一个站点](./first-site.md) 添加网站，这里需要注意的是，在填写端口的时候，就填写我们刚刚更改过后的端口。
+
+![宝塔修改添加站点](/images/baota-add-site.jpg)
 
 ## 升级
 
