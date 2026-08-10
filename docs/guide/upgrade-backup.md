@@ -2,6 +2,31 @@
 
 已经用 Docker 装好流盾后，按下面做升级和备份。升级不会故意清空你的站点配置；生产环境升级前建议先备份。
 
+## 一键更新（推荐）
+
+在服务器上再次执行安装脚本即可（脚本会自动识别已安装环境）：
+
+推荐链接：
+
+```bash
+curl -fsSL https://fswaf.top/install.sh | bash
+```
+
+备用链接：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/install.sh | bash
+```
+
+或在项目目录执行：
+
+```bash
+cd /path/to/flow-shield-waf
+bash install.sh
+```
+
+脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。
+
 ## 升级会影响什么
 
 - 升级时网站可能短暂抖十几到几十秒（应用在重建）
@@ -29,7 +54,7 @@ docker cp flowshield-waf-app:/tmp/waf_backup_$(date +%Y%m%d).db ./
 导入前建议先再导出一份当前配置，出问题好回退。细节见 [系统设置](./settings.md)。
 :::
 
-## 标准升级步骤
+## 手动升级步骤
 
 ### 1. 先备份
 
@@ -55,12 +80,6 @@ diff .env.example .env || true
 
 ```bash
 docker compose up -d --build
-```
-
-宝塔可以用：
-
-```bash
-bash deploy/baota/upgrade.sh
 ```
 
 ### 5. 验证

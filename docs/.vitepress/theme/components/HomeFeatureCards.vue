@@ -11,6 +11,12 @@ const cards: FeatureCardItem[] = [
       'Lua + Redis 防护引擎，单个请求跑完全部流程通常不到 1 毫秒。挡得住攻击，也不拖慢真实用户。'
   },
   {
+    icon: 'ai',
+    title: 'AI 驱动自行防护',
+    description:
+      '可调用 AI 生成精准策略；也支持条件触发后自动分析日志并创建规则，尽量做到无人值守持续防守。'
+  },
+  {
     icon: 'rules',
     title: '规则策略超级丰富',
     description:
@@ -29,16 +35,10 @@ const cards: FeatureCardItem[] = [
       '黑白名单、例外、限速、自定义规则，再加上总览、站点、证书、Bot 库与 IP 组，日常防护集中在一块面板。'
   },
   {
-    icon: 'ai',
-    title: 'AI 驱动自行防护',
-    description:
-      '可调用 AI 生成精准策略；也支持条件触发后自动分析日志并创建规则，尽量做到无人值守持续防守。'
-  },
-  {
     icon: 'deploy',
     title: '一键部署，上手快',
     description:
-      'Docker Compose 装好就能用，也兼容宝塔；文档、FAQ 与实操案例帮你把站点尽快接入防护链路。'
+      '一条命令完成安装部署，兼容所有系统及宝塔；文档、FAQ 与实操案例帮你把站点尽快接入防护链路。'
   }
 ]
 </script>

@@ -1,6 +1,8 @@
-# 宝塔部署
+# 宝塔部署（手动）
 
 流盾可以和宝塔装在同一台机器上。部署方式和普通服务器一样用 Docker，关键是把 **80 / 443 端口协调好**。
+
+更省事请优先用 [快速开始](./quick-start.md) 的一键安装（脚本可自动处理 Nginx 端口）。本文为手动步骤。
 
 ## 开始前
 
@@ -43,15 +45,15 @@ netstat -tlnp | grep -E ':80 |:443 '
 
 ### (a) 方案 1：本机已安装 Nginx（含宝塔 Nginx）
 
-宝塔默认会用 Nginx 托管网站，通常已占用 80 / 443。需要把 **Nginx / 宝塔下所有网站** 的监听端口都改成其他端口（例如 `8088` / `4433`），把 80 / 443 留给流盾。
+宝塔默认会用 Nginx 托管网站，通常已占用 80 / 443。需要把 **Nginx / 宝塔下所有网站** 的监听端口都改成其他端口（例如 `8080` / `4343`），把 80 / 443 留给流盾。
 
 常见改法（宝塔面板）：
 
 1. 打开宝塔 → **网站**，逐个站点进入设置
-2. 把 HTTP / HTTPS 监听端口改为高位端口（如 `8088` / `4433`）
+2. 把 HTTP / HTTPS 监听端口改为高位端口（如 `8080` / `4343`）
 3. 保存后确认 Nginx 已重载
 
-或在服务器上直接改 Nginx 配置（常见路径如 `/www/server/panel/vhost/nginx/`），把各站点里的 `listen 80;`、`listen 443 ssl;` 等改成新端口，然后重启nginx服务：
+或在服务器上直接改 Nginx 配置（常见路径如 `/www/server/panel/vhost/nginx/`），把各站点里的 `listen 80;`、`listen 443 ssl;` 等改成新端口，然后重启 nginx 服务：
 
 ![宝塔修改nginx端口](/images/baota-port-edit.png)
 
@@ -67,7 +69,7 @@ nginx -t && nginx -s reload
 任选其一：
 
 ```bash
-bash deploy/baota/install.sh
+bash install.sh
 ```
 
 或：
@@ -87,9 +89,11 @@ docker compose up -d --build
 
 ## 升级
 
+推荐再次执行一键命令（见 [快速开始](./quick-start.md)），或：
+
 ```bash
 cd /www/wwwroot/flow-shield-waf   # 按你的实际路径
-bash deploy/baota/upgrade.sh
+bash install.sh
 ```
 
 或手动：

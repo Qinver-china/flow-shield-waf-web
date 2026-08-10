@@ -10,6 +10,17 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
+## [Unreleased]
+
+### 新增
+
+- 统一一键安装/更新脚本 `install.sh`（官网静态资源 + GitHub 双链接）
+- 脚本支持 Linux / 宝塔 / macOS（Docker Desktop），自动处理依赖、80/443 与 Nginx listen、最少交互生成 `.env`
+
+### 变更
+
+- 文档将原分步部署改为「手动安装」；快速开始改为推荐一键命令
+
 ## [0.3.13] - 2026-08-09
 
 ### 新增

@@ -1,12 +1,12 @@
-# 常规服务器部署
+# 常规服务器部署（手动）
 
-在普通 Linux VPS / 云服务器上，用 Docker 安装流盾。若你用宝塔，请改看 [宝塔部署](./baota.md)。
+本文是**手动安装步骤**。更省事请用 [快速开始](./quick-start.md) 里的一键安装命令。若你用宝塔，也可直接看 [宝塔部署（手动）](./baota.md)。
 
 ## 环境要求
 
 | 项 | 要求 |
 |----|------|
-| 系统 | Ubuntu / Debian / CentOS 等常见 Linux |
+| 系统 | Ubuntu / Debian / CentOS 等常见 Linux；或 macOS + Docker Desktop |
 | Docker | 已安装，可用 `docker compose` |
 | 内存 | 建议 ≥ 2 GB |
 | 端口 | `80`、`443`（网站），`9000`（面板，可改） |
@@ -21,6 +21,8 @@
 docker --version
 docker compose version
 ```
+
+macOS 请安装并启动 [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/)。
 
 ## 2. 下载代码
 
@@ -51,17 +53,26 @@ vi .env
 |------|------|------|
 | `PANEL_PORT` | `9000` | 面板端口 |
 | `WAF_HTTP_PORT` / `WAF_HTTPS_PORT` | `80` / `443` | 网站对外端口 |
+| `WAF_ORIGIN_HOST_GATEWAY` | Linux `172.17.0.1`；macOS 建议 `host.docker.internal` | 回源到本机源站时的网关 |
 
 ::: tip
-密钥还是示例值时，服务可能起不来。务必改成自己的。
+密钥还是示例值时，服务可能起不来。务必改成自己的。一键安装脚本会自动随机生成这些值。
 :::
 
-## 4. 放行防火墙 / 安全组
+## 4. 检查端口
+
+```bash
+ss -tlnp | grep -E ':80 |:443 '
+```
+
+若被本机 Nginx 占用，把各站点 `listen 80/443` 改到高位端口（如 `8080` / `4343`）后重载 Nginx。
+
+## 5. 放行防火墙 / 安全组
 
 - `80`、`443`：给访客访问网站
 - `9000`（或你改过的面板端口）：尽量只给自己用（内网 / VPN / 反代）
 
-## 5. 启动
+## 6. 启动
 
 ```bash
 docker compose up -d --build
@@ -70,13 +81,11 @@ docker compose ps
 
 第一次构建可能要几分钟，服务都起来后再登录。
 
-## 6. 登录并接入站点
+## 7. 登录并接入站点
 
 1. 打开 `http://<服务器公网IP>:9000`
 2. 用 `.env` 里的账号登录
 3. 按 [接入第一个站点](./first-site.md) 配证书、站点和 DNS
-
-把域名的 A / AAAA 记录指到这台服务器公网 IP，解析生效后流量就会先过流盾再回源站。
 
 ## 升级、备份、停止
 

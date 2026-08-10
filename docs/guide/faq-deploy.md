@@ -1,6 +1,6 @@
 # 部署与运维 FAQ
 
-相关教程：[快速开始](./quick-start.md) · [常规服务器部署](./deploy-server.md) · [Docker 部署](./deploy-docker.md) · [宝塔部署](./baota.md)
+相关教程：[快速开始](./quick-start.md) · [常规服务器部署（手动）](./deploy-server.md) · [宝塔部署（手动）](./baota.md)
 
 ## 80/443 被占用，起不来
 

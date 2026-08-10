@@ -89,9 +89,8 @@ export default defineConfig({
           text: '安装与部署',
           items: [
             { text: '快速开始', link: '/guide/quick-start' },
-            { text: '常规服务器部署', link: '/guide/deploy-server' },
-            { text: 'Docker 部署详解', link: '/guide/deploy-docker' },
-            { text: '宝塔部署', link: '/guide/baota' },
+            { text: '手动部署', link: '/guide/deploy-server' },
+            { text: '宝塔手动部署', link: '/guide/baota' },
             { text: '升级与备份', link: '/guide/upgrade-backup' },
             { text: '更新日志', link: '/changelog' }
           ]
