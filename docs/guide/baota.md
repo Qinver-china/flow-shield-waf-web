@@ -17,8 +17,8 @@ cd /www/wwwroot
 git clone https://github.com/Qinver-china/flow-shield-waf.git
 cd flow-shield-waf
 
-cp .env.example .env
-vi .env   # 改密码、密钥、管理员账号
+cp .env.example .env #仅首次安装拷贝
+vi .env   # 推荐修改密码、密钥、管理员账号
 ```
 
 ## 2. 检查端口

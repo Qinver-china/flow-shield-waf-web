@@ -31,20 +31,20 @@ git clone https://github.com/Qinver-china/flow-shield-waf.git
 cd flow-shield-waf
 ```
 
-## 3. 改环境变量
+## 3. 改环境变量(仅首次安装)
 
 ```bash
 cp .env.example .env
 vi .env
 ```
 
-**必须改：**
+**推荐修改：**
 
 | 变量 | 说明 |
 |------|------|
 | `REDIS_PASSWORD` | 内部服务密码 |
-| `JWT_SECRET` | 登录相关密钥（≥ 16 位随机串） |
-| `WAF_CHALLENGE_SECRET` | 验证相关密钥（≥ 16 位随机串） |
+| `JWT_SECRET` | 登录相关密钥（建议长随机串） |
+| `WAF_CHALLENGE_SECRET` | 验证相关密钥（建议长随机串） |
 | `WAF_ADMIN_USER` / `WAF_ADMIN_PASSWORD` | 面板账号密码 |
 
 可选：
@@ -56,7 +56,7 @@ vi .env
 | `WAF_ORIGIN_HOST_GATEWAY` | Linux `172.17.0.1`；macOS 建议 `host.docker.internal` | 回源到本机源站时的网关 |
 
 ::: tip
-密钥还是示例值时，服务可能起不来。务必改成自己的。一键安装脚本会自动随机生成这些值。
+`.env.example` 已预置可用长度的密钥，直接复制也能启动；生产环境请尽快改成你自己的随机值。一键安装脚本会自动随机生成这些值。
 :::
 
 ## 4. 检查端口
