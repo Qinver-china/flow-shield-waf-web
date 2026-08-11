@@ -11,6 +11,7 @@
 | 3 | [CDN / 宝塔共存](./practice-cdn-baota.md) | 宝塔或前面有 CDN |
 | 4 | [放行合法爬虫](./practice-allow-bots.md) | SEO、监控探针 |
 | 5 | [攻击应急处置](./practice-incident.md) | 正在挨打 |
+| 6 | [性能优化指南](./practice-performance.md) | 磁盘/CPU 吃紧、流量很大 |
 
 ## 几条总原则
 

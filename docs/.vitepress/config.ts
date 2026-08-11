@@ -153,7 +153,8 @@ export default defineConfig({
             { text: '防 CC / 限速实战', link: '/guide/practice-cc' },
             { text: 'CDN / 宝塔共存', link: '/guide/practice-cdn-baota' },
             { text: '放行合法爬虫', link: '/guide/practice-allow-bots' },
-            { text: '攻击应急处置', link: '/guide/practice-incident' }
+            { text: '攻击应急处置', link: '/guide/practice-incident' },
+            { text: '性能优化指南', link: '/guide/practice-performance' }
           ]
         }
       ]

@@ -110,7 +110,3 @@ docker compose up -d --build app
 - `.env` 密钥没被误改
 
 各版本具体改了什么，见 [更新日志](/changelog)。
-
-::: danger
-`./scripts/fresh-start.sh` 会清空数据，只适合测试环境。
-:::
