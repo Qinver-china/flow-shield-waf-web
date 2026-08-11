@@ -134,6 +134,24 @@ body::before {
     border-top: none !important;
 }
 
+/* 文档页默认隐藏 footer，改为首页与文档页均展示备案信息 */
+.VPFooter.has-sidebar {
+    display: block !important;
+}
+
+.VPFooter .beian {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.6;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}
+
+.VPFooter .beian:hover {
+    color: var(--vp-c-text-2);
+}
+
 @media (min-width: 960px) {
     .VPNav .VPNavBar {
         background-color: color-mix(in srgb, var(--fs-bg-page) 10%, transparent) !important;

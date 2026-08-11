@@ -6,12 +6,12 @@ const heroRoot = ref<HTMLElement | null>(null)
 
 const points = [
   {
-    title: '超高性能',
-    icon: 'zap'
+    title: '开源免费',
+    icon: 'opensource'
   },
   {
-    title: '规则引擎',
-    icon: 'rules'
+    title: '超高性能',
+    icon: 'zap'
   },
   {
     title: 'AI 驱动',
@@ -37,24 +37,32 @@ const points = [
         <ul class="fs-home-hero__points">
           <li v-for="point in points" :key="point.title" class="fs-home-hero__point">
             <span class="fs-home-hero__point-icon" aria-hidden="true">
-              <svg v-if="point.icon === 'zap'" viewBox="0 0 24 24" fill="none">
+              <!-- 开源免费：解锁 + 圆点，表达开放可用 -->
+              <svg v-if="point.icon === 'opensource'" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M8 11V8.2A4.2 4.2 0 0 1 16.3 7"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+                <rect
+                  x="5"
+                  y="11"
+                  width="14"
+                  height="10"
+                  rx="2.2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                />
+                <circle cx="12" cy="16" r="1.35" fill="currentColor" />
+              </svg>
+              <svg v-else-if="point.icon === 'zap'" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M13 2 4 13.5h6.5L11 22l9-11.5h-6.5L13 2Z"
                   stroke="currentColor"
                   stroke-width="1.6"
                   stroke-linejoin="round"
                 />
-              </svg>
-              <svg v-else-if="point.icon === 'rules'" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M8 6h12M8 12h12M8 18h12"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-                <circle cx="4.5" cy="6" r="1.5" fill="currentColor" />
-                <circle cx="4.5" cy="12" r="1.5" fill="currentColor" />
-                <circle cx="4.5" cy="18" r="1.5" fill="currentColor" />
               </svg>
               <svg v-else viewBox="0 0 24 24" fill="none">
                 <!-- AI 星芒：主星 + 辅星 -->

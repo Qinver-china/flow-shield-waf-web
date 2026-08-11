@@ -65,7 +65,13 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '文档', link: '/guide/what-is-flow-shield' },
       { text: '快速开始', link: '/guide/quick-start' },
-      { text: '更新日志', link: '/changelog' }
+      { text: '更新日志', link: '/changelog' },
+      {
+        text: '讨论反馈',
+        link: 'https://www.zibll.top/forum/50814.html',
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      }
     ],
     sidebar: {
       '/changelog': [
@@ -157,7 +163,8 @@ export default defineConfig({
     ],
     footer: {
       message: '流盾 WAF · 守住每一次真实访问',
-      copyright: 'Copyright © Flow Shield WAF & <a href="https://zibll.com" target="_blank">zibll.com</a> All rights reserved.'
+      copyright:
+        '<a class="beian" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026045848号-1</a><br>Copyright © Flow Shield WAF & <a href="https://zibll.com" target="_blank" rel="noopener noreferrer">zibll.com</a> All rights reserved.'
     },
     outline: {
       label: '本页目录',

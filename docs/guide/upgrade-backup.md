@@ -4,7 +4,13 @@
 
 ## 一键更新（推荐）
 
-在服务器上再次执行安装脚本即可（脚本会自动识别已安装环境）：
+1.先进入项目文件夹，例如你的项目路径为`/www/wwwroot/flow-shield-waf`
+
+```bash
+cd /www/wwwroot/flow-shield-waf         # 进入此目录     
+```
+
+2.然后执行安装脚本即可（脚本会自动识别已安装环境）：
 
 推荐链接：
 
@@ -18,20 +24,14 @@ curl -fsSL https://fswaf.top/install.sh | bash
 curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/install.sh | bash
 ```
 
-或在项目目录执行：
-
-```bash
-cd /path/to/flow-shield-waf
-bash install.sh
-```
-
 脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。
 
 ## 升级会影响什么
 
 - 升级时网站可能短暂抖十几到几十秒（应用在重建）
-- 站点、规则、证书等配置一般会保留
 - 若你改了 `.env` 里的登录相关密钥，已登录的人可能要重新登录 —— **平时别乱改这两个密钥**
+- 站点、规则、证书等配置不会有任何影响
+- 其他变动请自行查看[更新日志](../changelog.md)
 
 ## 怎么备份
 

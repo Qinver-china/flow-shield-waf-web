@@ -4,13 +4,21 @@
 
 ## 你需要准备
 
-- Linux 服务器、宝塔环境，或已安装 Docker Desktop 的 macOS
+- Linux 服务器，推荐Ubuntu/Debian/OpenCloud/Alibaba等最新版系统
 - 建议内存 ≥ 2 GB
 - 放行端口：`80`、`443`（网站），`9000`（管理面板，可改）
+- 提前安装Docker及Docker Compose（可选，也可以不装，脚本会自动安装）
 
 ## 一键安装（推荐）
 
-在**打算存放项目的目录**下执行（脚本会先确认当前路径）：
+首次安装先创建一个部署的文件夹，例如`/www/wwwroot/flow-shield-waf`：
+
+```bash
+mkdir -p /www/wwwroot/flow-shield-waf   # 创建文件夹，路径可自定，仅首次使用
+cd /www/wwwroot/flow-shield-waf         # 进入此目录     
+```
+
+然后执行：
 
 推荐链接：
 
@@ -29,10 +37,10 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 1. 检测操作系统与 Docker / Compose / Git（缺失时可自动安装；macOS 需自行安装并启动 Docker Desktop）
 2. 判断是**首次安装**还是**更新**（已有 `flowshield-waf-app` 容器或项目目录）
 3. 检查 `80` / `443`；若被 Nginx / 宝塔占用，可自动改 listen 端口（默认改到 `8080` / `4343`，可自定义）
-4. 克隆代码并**本地构建**（不提供预构建镜像）
-5. 仅询问管理员账号与密码，其余 `.env` 密钥自动随机生成
+4. 在当前目录克隆代码并**本地构建**（不提供预构建镜像）
+5. 自动生成 `.env`（服务密钥随机；默认管理员 `admin` / `admin888`）
 
-安装完成后打开：`http://<服务器IP>:9000`，用你设置的管理员账号登录，然后做 [接入第一个站点](./first-site.md)。
+安装完成后打开面板地址，务必先修改管理员账号密码，然后 [接入第一个站点](./first-site.md)。
 
 ### 一键更新
 
