@@ -46,6 +46,11 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 
 使用与安装相同命令即可。在已部署机器上再次执行时，脚本会进入更新流程：备份 `.env` → `git pull` → 补齐新增环境变量 → 本地重建。
 
+```bash
+cd /www/wwwroot/flow-shield-waf         # 进入项目目录   
+curl -fsSL https://fswaf.top/install.sh | bash   #执行与安装相同的命令即可
+```
+
 ## 手动安装
 
 若无法使用一键脚本，或希望逐步可控：
