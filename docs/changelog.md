@@ -21,6 +21,7 @@ outline: deep
 
 - `.env.example` 调整字段顺序，管理员账号与端口等常用项更靠前
 - 文档补充：安装前关闭宝塔 Nginx 防火墙 / 雷池等同类型应用；FAQ 增加失效 Docker 镜像加速源排障
+- 部署 FAQ 补充：拉取镜像 timeout / i/o timeout 时，按毫秒镜像一键配置国内加速后再构建
 
 ### 修复
 

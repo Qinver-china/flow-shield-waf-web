@@ -26,25 +26,53 @@ docker compose logs --tail=100 app
 
 容器出网差。可在 compose 里给构建开 `network: host` 后重建，或本机构建镜像再拷到服务器。
 
-## 拉取 redis/clickhouse 报错
+## 看起来卡在 `npm run build`，很久没动
 
-通常是本机 Docker 的 **registry-mirrors** 仍指向已下线的加速源（最常见：`docker.mirrors.ustc.edu.cn`）。2024 年中起中科大等公开 Docker Hub 缓存已停服，DNS 会解析失败。
+前端 Vite 打包通常只要一两分钟。BuildKit 会**并行**拉取 `openresty` / `node` 等基础镜像；默认进度 UI 常仍停在 `frontend-build`，实际多半在下载 OpenResty（国内访问 Docker Hub 可能很慢）。
 
-立刻修复：
+一键安装已默认使用纯文本构建进度。手动构建可：
 
 ```bash
-# 查看当前加速源
-docker info | grep -A10 'Registry Mirrors'
+BUILDKIT_PROGRESS=plain docker compose build app
+```
 
-# 编辑配置，删掉失效地址（可整段去掉 registry-mirrors）
-sudo vi /etc/docker/daemon.json
-sudo systemctl restart docker
+若日志里出现 `FROM docker.io/openresty/openresty:...` 且层在缓慢增长，就是在拉基础镜像，不是前端卡死。拉取仍超时/失败时，见下一节镜像加速。
 
-# 再启动
+## 拉取镜像失败（timeout / dial tcp / i/o timeout）
+
+安装或 `docker compose up -d --build` 时，若卡在拉取 `node`、`openresty`、`redis`、`clickhouse` 等基础镜像，日志类似：
+
+- `failed to resolve source metadata for docker.io/...`
+- `dial tcp ...:443: i/o timeout`
+- `Head "https://registry-1.docker.io/...": ...`
+
+说明本机访问 Docker Hub（`registry-1.docker.io`）不通或极慢，国内服务器建议配置镜像加速后再装。
+
+国内推荐1： [轩辕镜像](https://xuanyuan.cloud/) 一键配置：
+
+```bash
+bash <(wget -qO- https://xuanyuan.cloud/docker.sh)
+```
+
+国内推荐2： [毫秒镜像](https://1ms.run/guide) 一键配置：
+
+```bash
+bash <(curl -sSL https://n3.ink/helper)
+```
+
+按提示完成 Docker 加速配置后，回到安装目录重新执行一键安装，或：
+
+```bash
 docker compose up -d --build
 ```
 
-一键安装脚本在启动前会检测已知失效源，并提示是否自动清理。
+也可手动写入加速源：
+
+```bash
+echo '{"registry-mirrors":["https://docker.xuanyuan.me","https://docker.1ms.run"],"dns": ["8.8.8.8", "114.114.114.114"]}' | sudo tee /etc/docker/daemon.json > /dev/null
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
 
 ## 升级会丢数据吗？
 
