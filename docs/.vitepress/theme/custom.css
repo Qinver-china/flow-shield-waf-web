@@ -27,6 +27,7 @@
     --vp-local-search-bg: var(--fs-bg-page);
     --vp-local-search-result-bg: rgba(255, 255, 255, 0.55);
     --vp-local-search-result-selected-bg: rgba(255, 255, 255, 0.85);
+    --vp-code-copy-code-hover-bg:rgba(255, 255, 255, 0.9);
 }
 
 .dark {
@@ -56,6 +57,7 @@
     --vp-local-search-bg: var(--fs-bg-page);
     --vp-local-search-result-bg: rgba(30, 41, 59, 0.55);
     --vp-local-search-result-selected-bg: rgba(30, 41, 59, 0.85);
+    --vp-code-copy-code-hover-bg:rgba(21, 30, 44, 0.85);
 }
 
 html,
