@@ -26,9 +26,25 @@ docker compose logs --tail=100 app
 
 容器出网差。可在 compose 里给构建开 `network: host` 后重建，或本机构建镜像再拷到服务器。
 
-## 升级后面板登不上
+## 拉取 redis/clickhouse 报错
 
-核对 `.env` 有没有被覆盖；用当前管理员账号密码登录；浏览器访问面板端口的健康检查。若改过登录密钥，旧会话全部失效是正常的。
+通常是本机 Docker 的 **registry-mirrors** 仍指向已下线的加速源（最常见：`docker.mirrors.ustc.edu.cn`）。2024 年中起中科大等公开 Docker Hub 缓存已停服，DNS 会解析失败。
+
+立刻修复：
+
+```bash
+# 查看当前加速源
+docker info | grep -A10 'Registry Mirrors'
+
+# 编辑配置，删掉失效地址（可整段去掉 registry-mirrors）
+sudo vi /etc/docker/daemon.json
+sudo systemctl restart docker
+
+# 再启动
+docker compose up -d --build
+```
+
+一键安装脚本在启动前会检测已知失效源，并提示是否自动清理。
 
 ## 升级会丢数据吗？
 

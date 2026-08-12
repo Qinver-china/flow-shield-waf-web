@@ -1,6 +1,6 @@
 {
   "name": "flow-shield-waf-web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "流盾 WAF 官方网站与文档",
   "scripts": {
     "build": "vitepress build docs",
