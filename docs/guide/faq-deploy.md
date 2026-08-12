@@ -26,18 +26,6 @@ docker compose logs --tail=100 app
 
 容器出网差。可在 compose 里给构建开 `network: host` 后重建，或本机构建镜像再拷到服务器。
 
-## 看起来卡在 `npm run build`，很久没动
-
-前端 Vite 打包通常只要一两分钟。BuildKit 会**并行**拉取 `openresty` / `node` 等基础镜像；默认进度 UI 常仍停在 `frontend-build`，实际多半在下载 OpenResty（国内访问 Docker Hub 可能很慢）。
-
-一键安装已默认使用纯文本构建进度。手动构建可：
-
-```bash
-BUILDKIT_PROGRESS=plain docker compose build app
-```
-
-若日志里出现 `FROM docker.io/openresty/openresty:...` 且层在缓慢增长，就是在拉基础镜像，不是前端卡死。拉取仍超时/失败时，见下一节镜像加速。
-
 ## 拉取镜像失败（timeout / dial tcp / i/o timeout）
 
 安装或 `docker compose up -d --build` 时，若卡在拉取 `node`、`openresty`、`redis`、`clickhouse` 等基础镜像，日志类似：
