@@ -121,7 +121,7 @@ export default defineConfig({
             { text: '总览面板', link: '/guide/dashboard' },
             {
               text: '站点管理',
-              collapsed: true,
+              collapsed: false,
               items: [
                 { text: '站点配置', link: '/guide/sites' },
                 { text: '证书管理', link: '/guide/certificates' },

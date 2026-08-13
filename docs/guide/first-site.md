@@ -67,6 +67,10 @@
 | True-Client-IP | Akamai 等 |
 | X-Real-IP / X-Client-IP | 一般反代 |
 
+::: tip 技巧
+如果没有使用 CDN，就选 直连 IP。如果上游使用了 CDN，那么先选 X-Forwarded-For，然后再观察一下。大多数的 CDN 都是使用的 X-Forwarded-For，如果 X-Forwarded-For 获取不到正确的 IP，再选择其他的测试
+:::
+
 ## 5. 改 DNS
 
 把域名的 A / AAAA 指到本机公网 IP（或把 CDN 回源指到本机）。生效后到 [总览](./dashboard.md) 或 [防护日志](./logs.md) 看有没有请求进来。
