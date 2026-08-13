@@ -5,6 +5,16 @@ const siteDescription =
   '流盾 WAF - Flow Shield WAF，守住每一次真实访问。面向网站与 Web 应用的智能流量防护系统，基于 OpenResty 反向代理，支持 CC 防护、规则引擎与 Docker 一键部署。'
 const homeOgTitle = '流盾 WAF - Flow Shield WAF - 守住每一次真实访问'
 
+const supportSidebar = [
+  {
+    text: '支持',
+    items: [
+      { text: '付费服务', link: '/paid-service' },
+      { text: '打赏支持', link: '/sponsor' }
+    ]
+  }
+]
+
 export default defineConfig({
   lang: 'zh-CN',
   title: siteName,
@@ -64,8 +74,9 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/guide/what-is-flow-shield' },
-      { text: '快速开始', link: '/guide/quick-start' },
       { text: '更新日志', link: '/changelog' },
+      { text: '付费服务', link: '/paid-service' },
+      { text: '打赏支持', link: '/sponsor' },
       {
         text: '讨论反馈',
         link: 'https://www.zibll.top/forum/50814.html',
@@ -74,6 +85,8 @@ export default defineConfig({
       }
     ],
     sidebar: {
+      '/paid-service': supportSidebar,
+      '/sponsor': supportSidebar,
       '/changelog': [
         {
           text: '发布说明',

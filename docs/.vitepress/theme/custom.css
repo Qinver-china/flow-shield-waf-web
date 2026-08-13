@@ -236,3 +236,31 @@ body::before {
 .medium-zoom-overlay {
     backdrop-filter: blur(10px);
 }
+
+/* 付费服务 / 打赏支持：二维码尺寸 */
+.vp-doc .qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 1.75rem auto;
+}
+
+.vp-doc .qr-wrap img {
+    width: 100%;
+    height: auto;
+}
+
+.vp-doc .qr-wechat {
+    max-width: 260px;
+}
+
+.vp-doc .qr-sponsor {
+    max-width: 500px;
+}
+
+.vp-doc .qr-wrap figcaption {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--vp-c-text-2);
+}
