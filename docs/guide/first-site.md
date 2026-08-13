@@ -62,10 +62,10 @@
 | 选项 | 什么时候用 |
 |------|------------|
 | 直连 IP | 没有 CDN |
+| X-Forwarded-For（第一个） | 大多数 CDN 都是这个 |
 | CF-Connecting-IP | Cloudflare |
 | True-Client-IP | Akamai 等 |
 | X-Real-IP / X-Client-IP | 一般反代 |
-| X-Forwarded-For（第一个/最后一个） | 多层代理 |
 
 ## 5. 改 DNS
 

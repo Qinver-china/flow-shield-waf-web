@@ -37,13 +37,13 @@
 | 选项 | 适用 |
 |------|------|
 | 直连 IP | 没有 CDN（默认） |
+| X-Forwarded-For（第一个） | 大多数 CDN 都是这个 |
 | CF-Connecting-IP | Cloudflare |
 | True-Client-IP | Akamai 等 |
 | X-Real-IP / X-Client-IP | 一般反代 |
-| X-Forwarded-For（第一个/最后一个） | 多层代理 |
 
-::: warning
-流量要只从可信的 CDN/代理进来。网站直接裸奔公网时，保持「直连 IP」，避免别人伪造请求头。
+::: tip 技巧
+如果没有使用 CDN，就选 直连 IP。如果上游使用了 CDN，那么先选 X-Forwarded-For，然后再观察一下。大多数的 CDN 都是使用的 X-Forwarded-For，如果 X-Forwarded-For 获取不到正确的 IP，再选择其他的测试
 :::
 
 ### 高级（可选）
