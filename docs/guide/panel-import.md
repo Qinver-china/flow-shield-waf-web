@@ -53,7 +53,7 @@ description: 从宝塔或 1Panel 一次性导入站点与 SSL 证书到流盾 WA
 2. 回到流盾面板集成，使用此密钥添加宝塔面板
 
 ::: tip
-同机部署时，宝塔看到的是流盾容器的源 IP（如 `172.18.0.4`、`172.17.0.3`），不是固定的 `172.17.0.1`。一键安装会自动识别并写入；手动配置可用 `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' flowshield-waf-app` 查看后加入白名单。
+同机部署时，宝塔看到的是流盾容器的源 IP（如 `172.18.0.4`、`172.17.0.3`），不是固定的 `172.17.0.1`。一键安装会自动识别并写入；手动配置可用 <code v-pre>docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' flowshield-waf-app</code> 查看后加入白名单。
 :::
 
 ### 1Panel 创建密钥
