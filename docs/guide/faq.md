@@ -7,7 +7,7 @@
 | 分类 | 文档 | 常见问题 |
 |------|------|----------|
 | 部署与运维 | [部署 FAQ](./faq-deploy.md) | 端口占用、起不来、镜像拉取、密钥、升级 |
-| 站点与证书 | [站点 FAQ](./faq-sites.md) | 502、HTTPS 循环、CDN IP、证书 |
+| 站点与证书 | [站点 FAQ](./faq-sites.md) | 502、HTTPS 循环、CDN IP、证书、面板导入 |
 | 防护与规则 | [规则 FAQ](./faq-rules.md) | 没命中、误拦、限速、Bot |
 | AI 与通知 | [AI 通知 FAQ](./faq-ai-alerts.md) | 模型连不上、邮件、自动拦截过激 |
 

@@ -24,7 +24,7 @@ curl -fsSL https://fswaf.top/install.sh | bash
 curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/install.sh | bash
 ```
 
-脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。
+脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。健康检查通过后会再检测本机宝塔 / 1Panel；若已有同服务器账号则跳过，不会覆盖你改过的配置。
 
 ## 升级会影响什么
 

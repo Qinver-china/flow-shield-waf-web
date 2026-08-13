@@ -2,19 +2,14 @@
 
 面板入口：**资产 → 站点管理**。这里告诉流盾：哪些域名要防护、流量回哪里、怎么认出访客真实 IP。
 
-最短路径见 [接入第一个站点](./first-site.md)。
+最短路径见 [接入第一个站点](./first-site.md)。已有宝塔 / 1Panel 站点时，用 [从其他面板导入](./panel-import.md) 批量接入（一次性导入，不是持续同步）。账号在 [系统设置 → 面板集成](./settings.md) 维护。
 
 ![站点管理列表](/images/sites-list.png)
 <!-- TODO: 截图 站点管理列表 -->
 
-## 什么时候来改
+## 站点添加或编辑
 
-- 新网站要接入防护
-- 改回源地址、证书、强制 HTTPS
-- 前面加了 CDN，要改真实 IP 获取方式
-- 想给某个站单独换拦截页
-
-## 主要字段（白话）
+![站点编辑表单](/images/sites-edit.png)
 
 ### 域名
 
@@ -34,9 +29,6 @@
 | 监听 HTTP / HTTPS | 对外是否接收这两种访问；HTTPS 必须选证书 |
 | SSL 证书 | 在 [证书管理](./certificates.md) 里上传后选 |
 | 强制 HTTPS | 访客用 HTTP 进来时跳到 HTTPS |
-
-![站点编辑表单](/images/sites-edit.png)
-<!-- TODO: 截图 站点编辑页关键字段 -->
 
 ### 客户端 IP 获取方式
 
@@ -65,8 +57,8 @@
 
 ## 推荐操作
 
-1. （HTTPS）先在证书管理上传证书  
-2. 新增站点：域名 → 回源地址和端口 → 监听与证书  
+1. （HTTPS）先在证书管理上传证书，或 [从其他面板导入](./panel-import.md)  
+2. 新增站点：域名 → 回源地址和端口 → 监听与证书；同机宝塔常见回源 `host.docker.internal` + `8080`  
 3. 有 CDN 就选对「客户端 IP 获取方式」  
 4. 保存，把 DNS 指到本机  
 5. 浏览器访问一次，到 [防护日志](./logs.md) / [总览](./dashboard.md) 确认有请求  
@@ -85,4 +77,4 @@
 
 ## 下一步
 
-[证书管理](./certificates.md) · [防护策略总览](./protection-basics.md)
+[证书管理](./certificates.md) · [从其他面板导入](./panel-import.md) · [防护策略总览](./protection-basics.md)

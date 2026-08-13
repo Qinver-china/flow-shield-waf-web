@@ -44,7 +44,7 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 4. 在当前目录克隆代码并**本地构建**（不提供预构建镜像）
 5. 自动生成 `.env`（服务密钥随机；默认管理员 `admin` / `admin888`）
 
-安装完成后打开面板地址，务必先修改管理员账号密码，然后 [接入第一个站点](./first-site.md)。
+安装完成后打开面板地址，务必先修改管理员账号密码，然后 [接入第一个站点](./first-site.md)。本机已有宝塔 / 1Panel 网站时，可 [从其他面板导入](./panel-import.md)。
 
 ### 一键更新
 

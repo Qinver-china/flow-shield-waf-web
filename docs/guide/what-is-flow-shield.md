@@ -73,7 +73,7 @@
 | 菜单 | 能干嘛 | 教程 |
 |------|--------|------|
 | 概览 | 看整体态势 | [总览面板](./dashboard.md) |
-| 资产 | 站点、证书 | [站点配置](./sites.md)、[证书管理](./certificates.md) |
+| 资产 | 站点、证书 | [站点配置](./sites.md)、[证书管理](./certificates.md)、[从其他面板导入](./panel-import.md) |
 | 策略 | 黑白名单、例外、限速、规则、AI | [防护策略总览](./protection-basics.md) |
 | 观测 | Bot、IP 组、日志、预警 | [Bot 库](./bots.md)、[防护日志](./logs.md) 等 |
 | 系统 | 设置与备份 | [系统设置](./settings.md) |

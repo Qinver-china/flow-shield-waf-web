@@ -119,8 +119,15 @@ export default defineConfig({
           items: [
             { text: '接入第一个站点', link: '/guide/first-site' },
             { text: '总览面板', link: '/guide/dashboard' },
-            { text: '站点配置', link: '/guide/sites' },
-            { text: '证书管理', link: '/guide/certificates' },
+            {
+              text: '站点管理',
+              collapsed: true,
+              items: [
+                { text: '站点配置', link: '/guide/sites' },
+                { text: '证书管理', link: '/guide/certificates' },
+                { text: '从其他面板导入', link: '/guide/panel-import' }
+              ]
+            },
             {
               text: '防护策略',
               collapsed: false,
