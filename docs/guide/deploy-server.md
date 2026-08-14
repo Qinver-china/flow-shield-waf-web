@@ -49,7 +49,6 @@ vi .env
 | `REDIS_PASSWORD` | 内部服务密码 |
 | `JWT_SECRET` | 登录相关密钥（建议长随机串） |
 | `WAF_CHALLENGE_SECRET` | 验证相关密钥（建议长随机串） |
-| `WAF_ADMIN_USER` / `WAF_ADMIN_PASSWORD` | 面板账号密码 |
 
 可选：
 
@@ -88,7 +87,7 @@ docker compose ps
 ## 7. 登录并接入站点
 
 1. 打开 `http://<服务器公网IP>:9000`
-2. 用 `.env` 里的账号登录
+2. 全新安装首次打开登录页时设置管理员账号密码
 3. 按 [接入第一个站点](./first-site.md) 配证书、站点和 DNS
 
 ## 升级、备份、停止

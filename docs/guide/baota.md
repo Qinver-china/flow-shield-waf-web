@@ -22,7 +22,7 @@ git clone https://github.com/Qinver-china/flow-shield-waf.git
 cd flow-shield-waf
 
 cp .env.example .env #仅首次安装拷贝
-vi .env   # 推荐修改密码、密钥、管理员账号
+vi .env   # 推荐修改密码、密钥
 ```
 
 ## 2. 检查端口
@@ -68,15 +68,7 @@ nginx -t && nginx -s reload
 
 改完后，记住刚刚改的 HTTP 和 HTTPS 端口分别是多少，最后我们部署完成之后，在流盾 WAF 后台添加站点的时候，就填写改之后的端口。
 
-## 3. 启动
-
-任选其一：
-
-```bash
-bash install.sh
-```
-
-或：
+## 3. 构建并启动
 
 ```bash
 docker compose up -d --build
@@ -85,7 +77,7 @@ docker compose up -d --build
 ## 4. 登录并添加网站
 
 - 面板地址：`http://<服务器IP>:9000`
-- 账号密码：`.env` 里的 `WAF_ADMIN_USER` / `WAF_ADMIN_PASSWORD`
+- 全新安装首次打开登录页时设置管理员账号密码；已有环境使用已设置的账号登录
 
 接着按 [接入第一个站点](./first-site.md) 添加网站。一键安装若检测到本机宝塔，会在「系统设置 → 面板集成」写入「本机宝塔」账号，可按 [从其他面板导入](./panel-import.md) 批量接入；手动添加时，回源端口填写刚刚改过的高位端口。
 

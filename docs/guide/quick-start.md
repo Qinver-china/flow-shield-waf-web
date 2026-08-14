@@ -42,9 +42,9 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 2. 判断是**首次安装**还是**更新**（已有 `flowshield-waf-app` 容器或项目目录）
 3. 检查 `80` / `443`；若被 Nginx / 宝塔占用，可自动改 listen 端口（默认改到 `8080` / `4343`，可自定义）
 4. 在当前目录克隆代码并**本地构建**（不提供预构建镜像）
-5. 自动生成 `.env`（服务密钥随机；默认管理员 `admin` / `admin888`）
+5. 自动生成 `.env`（服务密钥随机）。全新安装首次打开面板时设置管理员账号密码
 
-安装完成后打开面板地址，务必先修改管理员账号密码，然后 [接入第一个站点](./first-site.md)。本机已有宝塔 / 1Panel 网站时，可 [从其他面板导入](./panel-import.md)。
+安装完成后打开面板地址，设置管理员账号后即可使用，然后 [接入第一个站点](./first-site.md)。本机已有宝塔 / 1Panel 网站时，可 [从其他面板导入](./panel-import.md)。
 
 ### 一键更新
 

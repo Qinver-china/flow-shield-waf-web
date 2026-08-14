@@ -62,6 +62,26 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+## docker 构建时候非常慢
+
+原因和上面类似，主要是因为国内网络问题，可以在环境变量添加国内软件镜像源有很好效果
+
+编辑`.env`文件，在末尾添加以下内容
+
+```bash
+# 手动 docker compose build 若要用国内源，取消下面注释即可（海外请保持注释）。
+FSWAF_PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
+FSWAF_PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn
+FSWAF_ALPINE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/alpine
+FSWAF_NPM_REGISTRY=https://registry.npmmirror.com
+FSWAF_CARGO_REGISTRY=sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/
+```
+然后重新构建并启动
+
+```bash
+docker compose up -d --build
+```
+
 ## 升级会丢数据吗？
 
 常规升级重建容器**不会**删数据卷。只有带清卷的卸载，或官方「全新开始」脚本才会清空。详见 [升级与备份](./upgrade-backup.md)。
