@@ -76,7 +76,9 @@ FSWAF_ALPINE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/alpine
 FSWAF_NPM_REGISTRY=https://registry.npmmirror.com
 FSWAF_CARGO_REGISTRY=sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/
 ```
-然后重新构建并启动
+写入后请一直用这一组地址，不要命令行再换另一个 Alpine 源，否则 `apk add` 缓存会失效、构建又会变慢。
+
+然后重新构建并启动：
 
 ```bash
 docker compose up -d --build

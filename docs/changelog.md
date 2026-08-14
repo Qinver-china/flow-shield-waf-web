@@ -10,6 +10,23 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
+## [1.0.3] - 2026-08-14
+
+### 新增
+
+- 全新安装首次打开登录页时设置管理员账号密码（不再从环境变量写入默认 `admin` / `admin888`）；已有环境因库中已有账号，仍走正常登录
+
+### 变更
+
+- 默认登录会话有效期改为 3 天（`JWT_REFRESH_TTL_DAYS=3`），到期后需重新登录
+- 一键安装自动探测本机 IP：写入宝塔 API 白名单，完成页展示面板「IP:端口」
+- Docker 构建将 apk 系统包层与 pip/npm 等源解耦，日常更新不再因换 pip 源而重装 python/nginx
+- 文档同步首次登录设管理员、构建过慢时把国内源写入 `.env`（勿临时换镜像）
+
+### 修复
+
+- 宝塔 API 白名单漏加本机 IP，导致同机调用面板接口失败
+
 ## [1.0.2] - 2026-08-13
 
 ### 新增
