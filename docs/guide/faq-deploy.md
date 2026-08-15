@@ -2,6 +2,18 @@
 
 相关教程：[快速开始](./quick-start.md) · [常规服务器部署（手动）](./deploy-server.md) · [宝塔部署（手动）](./baota.md)
 
+## 改了 EXTRA_LISTEN_PORTS 但端口没开出来
+
+`.env` 改完后要同步并重启：
+
+```bash
+bash scripts/sync-compose-ports.sh && docker compose up -d
+```
+
+不要直接修改 `docker-compose.override.yml`，只改 `.env` 里的 `EXTRA_LISTEN_PORTS` 再执行上面的命令。
+
+一键安装 / 更新会自动同步。`80`、`443`、面板端口不必写进这个变量。站点里还要打开「修改访问监控端口」并填相同端口。示例见 [站点配置](./sites.md#custom-listen-ports)。
+
 ## 80/443 被占用，起不来
 
 先查谁占用了端口。宝塔场景：把网站改到高位端口，让流盾占 80/443（推荐）。或改部署配置里的 HTTP/HTTPS 端口，并同步改防火墙与 DNS。

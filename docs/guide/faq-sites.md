@@ -2,6 +2,12 @@
 
 相关教程：[站点配置](./sites.md) · [证书管理](./certificates.md) · [从其他面板导入](./panel-import.md) · [接入第一个站点](./first-site.md)
 
+## 改成 9088 等自定义端口后打不开
+
+两件事都要做：`.env` 里的 `EXTRA_LISTEN_PORTS` 已包含该端口，并已执行 `bash scripts/sync-compose-ports.sh && docker compose up -d`；站点高级设置里「修改访问监控端口」也填了同一个端口。只改面板、不映射 Docker，宿主机上没有这个端口。不要手改 `docker-compose.override.yml`，只改 `.env`。完整步骤见 [站点配置 · 自定义访问端口](./sites.md#custom-listen-ports)。
+
+本机源站如果已经占用了这个端口，不要再映射给流盾，否则 Docker 会启动失败。这种场景让流盾继续听 80，只把回源端口改成源站端口。
+
 ## 打开网站是 502 / 503 / 504
 
 多半是回源地址或端口不对，或源站没在听。Docker 里别把源站写成容器自己的 `127.0.0.1`。

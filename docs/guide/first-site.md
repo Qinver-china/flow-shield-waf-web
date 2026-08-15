@@ -35,6 +35,7 @@
 | 回源地址 | 源站机器地址，如 `172.17.0.1` 或 `host.docker.internal` |
 | 回源端口 | 源站实际端口（宝塔高位端口常见如 8080） |
 | 监听 HTTP / HTTPS | 至少开一个；HTTPS 必须选证书 |
+| 访问端口不是 80 / 443 | 先在 `.env` 写 `EXTRA_LISTEN_PORTS`，再打开「修改访问监控端口」。完整示例见 [站点配置](./sites.md#custom-listen-ports) |
 | 客户端 IP 获取方式 | 无 CDN 用直连；有 CDN 选对应头 |
 
 ![新增站点表单](/images/sites-create.png)

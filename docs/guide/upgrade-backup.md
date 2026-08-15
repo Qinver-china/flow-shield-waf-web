@@ -31,6 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 - 升级时网站可能短暂抖十几到几十秒（应用在重建）
 - 若你改了 `.env` 里的登录相关密钥，已登录的人可能要重新登录 —— **平时别乱改这两个密钥**
 - 站点、规则、证书等配置不会有任何影响
+- `.env` 会保留（含 `EXTRA_LISTEN_PORTS` 等）；一键更新启动前会按 `.env` 重新生成 `docker-compose.override.yml`。不要手改该文件，改端口只动 `.env`
 - 其他变动请自行查看[更新日志](../changelog.md)
 
 ## 怎么备份
