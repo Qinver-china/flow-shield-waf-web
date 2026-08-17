@@ -27,7 +27,7 @@
 | 回源协议 | 访问源站用 HTTP 还是 HTTPS，也可跟随访客 |
 | HTTP / HTTPS 回源端口 | 源站实际端口 |
 | 监听 HTTP / HTTPS | 对外是否接收这两种访问；HTTPS 必须选证书 |
-| SSL 证书 | 在 [证书管理](./certificates.md) 里上传后选 |
+| SSL 证书 | 在 [证书管理](./certificates.md) 里上传、申请免费证书或从面板导入后选 |
 | 强制 HTTPS | 访客用 HTTP 进来时跳到 HTTPS |
 
 ### 客户端 IP 获取方式
@@ -115,7 +115,7 @@ bash scripts/sync-compose-ports.sh && docker compose up -d
 http://www.example.com:9088
 ```
 
-DNS 仍把域名指到这台服务器。浏览器地址栏必须带 `:9088`，因为已经不走默认 80。
+DNS 仍把域名指到这台服务器。浏览器地址栏必须带 `:9088`，因为已经不走默认 80。站点列表卡片上的跳转链接也会带上这个端口（优先 HTTP；80 / 443 不显示端口号）。
 
 ::: tip
 同一站点的 HTTP 端口和 HTTPS 端口不能填同一个数字。不同站点可以共用同一协议的同一端口（例如都听 HTTP 80）；但不能一个听 HTTP、另一个听 HTTPS 占用同一个端口，保存时会提示占用。端口 80 被引擎默认 HTTP 占用，也不能拿来开 HTTPS。面板端口、以及 Docker 里已占用的端口也不能拿来当站点监听。
@@ -123,7 +123,7 @@ DNS 仍把域名指到这台服务器。浏览器地址栏必须带 `:9088`，�
 
 ## 推荐操作
 
-1. （HTTPS）先在证书管理上传证书，或 [从其他面板导入](./panel-import.md)  
+1. （HTTPS）先在证书管理上传、[申请免费证书](./certificates.md#acme)，或 [从其他面板导入](./panel-import.md)  
 2. 新增站点：域名 → 回源地址和端口 → 监听与证书；同机宝塔常见回源 `host.docker.internal` + `8080`  
 3. 有 CDN 就选对「客户端 IP 获取方式」  
 4. 保存，把 DNS 指到本机  
