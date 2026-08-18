@@ -8,7 +8,9 @@ description: 从宝塔或 1Panel 一次性导入站点与 SSL 证书到流盾 WA
 把宝塔或 1Panel 里已经在跑的网站、证书，一次性接到流盾。适合刚装完流盾、本机（或另一台机器）上已经有面板站点的情况。
 
 ::: tip 一次性导入，不是持续同步
-导入完成后，两边互不影响。以后在宝塔 / 1Panel 增删站点或续签证书，不会自动反映到流盾；需要的话再导入一次，或在流盾里手动改。
+从面板导入到流盾是一次性的。以后在宝塔 / 1Panel 里改站点或续签证书，不会自动出现在流盾里；需要的话再导入一次。
+
+反过来，证书在流盾里续好后，可以同步回宝塔 / 1Panel，见 [续期后同步到宝塔 / 1Panel](./certificates.md#panel-push)。
 :::
 
 字段细节见 [站点配置](./sites.md)、[证书管理](./certificates.md)。面板账号在 [系统设置 → 面板集成](./settings.md) 维护。
@@ -141,8 +143,12 @@ description: 从宝塔或 1Panel 一次性导入站点与 SSL 证书到流盾 WA
 
 ### 以后宝塔续签了证书，流盾会自动更新吗？
 
-不会自动跟着面板续签。可以：再执行一次证书导入；或在证书管理里编辑该证书，用 [覆盖已有证书](#replace-certificate) 从面板导入；若这张证书是流盾自己申请的免费证书，打开 [到期前自动续期](./certificates.md#acme) 即可。
+不会自动跟着面板续签。可以：再执行一次证书导入；或在证书管理里编辑该证书，用 [覆盖已有证书](#replace-certificate) 从面板导入。
+
+### 流盾续好证书后，宝塔 / 1Panel 会一起换成新证书吗？
+
+可以。在证书页打开自动续期，再打开「续期时自动推送到其他面板」，勾选网站后保存。详见 [续期后同步到宝塔 / 1Panel](./certificates.md#panel-push)。
 
 ## 相关文档
 
-[接入第一个站点](./first-site.md) · [站点配置](./sites.md) · [证书管理](./certificates.md) · [系统设置](./settings.md) · [宝塔部署](./baota.md)
+[接入第一个站点](./first-site.md) · [站点配置](./sites.md) · [证书管理](./certificates.md) · [续期后同步到宝塔 / 1Panel](./certificates.md#panel-push) · [系统设置](./settings.md) · [宝塔部署](./baota.md)

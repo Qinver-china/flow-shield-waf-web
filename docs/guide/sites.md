@@ -7,9 +7,11 @@
 ![站点管理列表](/images/sites-list.png)
 <!-- TODO: 截图 站点管理列表 -->
 
+默认是卡片列表。筛选栏最右侧可切换成表格，选择会记在当前浏览器里，刷新后保持上次样式。
+
 ## 站点添加或编辑
 
-![站点编辑表单](/images/sites-edit.png)
+![站点编辑表单](/images/sites-edit.jpg)
 
 ### 域名
 
@@ -43,7 +45,7 @@
 | X-Real-IP / X-Client-IP | 一般反代 |
 
 ::: tip 技巧
-如果没有使用 CDN，就选 直连 IP。如果上游使用了 CDN，那么先选 X-Forwarded-For，然后再观察一下。大多数的 CDN 都是使用的 X-Forwarded-For，如果 X-Forwarded-For 获取不到正确的 IP，再选择其他的测试
+如果没有使用 CDN，就选 直连 IP。如果上游使用了 CDN，那么先选 X-Forwarded-For，然后再观察一下。大多数的 CDN 都是使用的 X-Forwarded-For，如果 X-Forwarded-For 获取不到正确的 IP，再选择其他的测试。改成 CDN 头之后，[防护日志](./logs.md) 里「客户端 IP」是访客，**直连 IP** 仍是 TCP 对端（CDN 边缘节点）。
 :::
 
 ### 高级（可选）
