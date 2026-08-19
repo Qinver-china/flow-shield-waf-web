@@ -2,5 +2,6 @@ node_modules
 docs/.vitepress/dist
 docs/.vitepress/cache
 .playwright-cli/
+.cursor/
 .DS_Store
 *.log

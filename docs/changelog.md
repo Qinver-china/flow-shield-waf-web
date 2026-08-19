@@ -10,8 +10,6 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
-## [未发布]
-
 ## [1.0.7] - 2026-08-19
 
 ### 新增
