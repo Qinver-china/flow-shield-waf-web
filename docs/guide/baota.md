@@ -2,7 +2,7 @@
 
 流盾可以和宝塔装在同一台机器上。部署方式和普通服务器一样用 Docker，关键是把 **80 / 443 端口协调好**。
 
-更省事请优先用 [快速开始](./quick-start.md) 的一键安装（脚本可自动处理 Nginx 端口）。本文为手动步骤。
+宝塔部署涉及到端口修改比较复杂，强烈推荐使用 [快速开始](./quick-start.md) 的`一键安装`（脚本可自动处理 Nginx 端口）。本文为手动步骤。
 
 ## 开始前
 
@@ -121,5 +121,25 @@ docker compose down               # 停止，勿加 -v
 docker compose exec -T app cp /data/waf.db /tmp/waf_backup_$(date +%Y%m%d).db
 docker cp flowshield-waf-app:/tmp/waf_backup_$(date +%Y%m%d).db ./
 ```
+
+## 清理多余的构建缓存
+
+由于 Docker 的机制，每次构建应用都会在本地留下历史构建缓存与悬空镜像，多次升级构建后可能会占用较大的磁盘空间。建议在构建**成功**后执行一以下清理命令（不影响任何数据与服务）：
+
+```bash
+docker builder prune -f
+docker image prune -f
+```
+
+查看占用：
+
+```bash
+docker system df
+```
+
+::: tip
+一键安装 / 更新脚本会在构建成功后自动执行上述清理。
+:::
+
 
 构建失败、端口冲突等，见 [部署与运维 FAQ](./faq-deploy.md)。

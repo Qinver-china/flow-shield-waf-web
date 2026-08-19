@@ -24,7 +24,7 @@ curl -fsSL https://fswaf.top/install.sh | bash
 curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/install.sh | bash
 ```
 
-脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。健康检查通过后会再检测本机宝塔 / 1Panel；若已有同服务器账号则跳过，不会覆盖你改过的配置。
+脚本会：备份 `.env` → 拉取代码 → 补齐新增环境变量 → 本地重建并做健康检查。构建成功后会清理未使用的 Docker 构建缓存与悬空镜像，减轻多次升级后的磁盘占用。健康检查通过后会再检测本机宝塔 / 1Panel；若已有同服务器账号则跳过，不会覆盖你改过的配置。
 
 ## 升级会影响什么
 
@@ -52,7 +52,7 @@ docker cp flowshield-waf-app:/tmp/waf_backup_$(date +%Y%m%d).db ./
 也可以在面板里：**系统设置 → 导出/导入**，把站点、证书、规则等配置导出成文件，方便迁移或灾备（不含很久以前的历史日志明细）。
 
 ::: tip
-导入前建议先再导出一份当前配置，出问题好回退。细节见 [系统设置](./settings.md)。
+导入前建议先再导出一份当前配置，出问题好回退。导入「系统设置」分段后会重载引擎，使请求体上限、源站超时等立刻生效。细节见 [系统设置](./settings.md#backup)。
 :::
 
 ## 手动升级步骤
@@ -82,6 +82,15 @@ diff .env.example .env || true
 ```bash
 docker compose up -d --build
 ```
+
+构建成功后建议清理缓存（不影响运行中的服务与数据）：
+
+```bash
+docker builder prune -f
+docker image prune -f
+```
+
+一键更新会自动做这两步。
 
 ### 5. 验证
 

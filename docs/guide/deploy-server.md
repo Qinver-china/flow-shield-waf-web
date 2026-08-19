@@ -98,3 +98,22 @@ docker compose ps
 - 删除服务并清空数据（不可恢复）：`docker compose down -v` —— 生产慎用
 
 端口冲突、起不来等问题，见 [部署与运维 FAQ](./faq-deploy.md)。
+
+## 清理多余的构建缓存
+
+由于 Docker 的机制，每次构建应用都会在本地留下历史构建缓存与悬空镜像，多次升级构建后可能会占用较大的磁盘空间。手动构建**成功**后可执行以下清理（不影响任何数据与服务）：
+
+```bash
+docker builder prune -f
+docker image prune -f
+```
+
+查看占用：
+
+```bash
+docker system df
+```
+
+::: tip
+一键安装 / 更新脚本会在构建成功后自动执行上述清理。
+:::

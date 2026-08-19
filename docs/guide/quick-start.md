@@ -1,6 +1,6 @@
 # 快速开始
 
-用最短步骤把流盾装上并登录面板。推荐使用一键安装脚本；需要逐步操作时再看各环境的手动安装说明。
+推荐使用使用一键安装（包含更新）脚本，可以自动安装依赖附属项目，以及处理端口、镜像加速、缓存清理等流程全自动搞定
 
 ## 你需要准备
 
@@ -41,8 +41,10 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 1. 检测操作系统与 Docker / Compose / Git（缺失时可自动安装；macOS 需自行安装并启动 Docker Desktop）
 2. 判断是**首次安装**还是**更新**（已有 `flowshield-waf-app` 容器或项目目录）
 3. 检查 `80` / `443`；若被 Nginx / 宝塔占用，可自动改 listen 端口（默认改到 `8080` / `4343`，可自定义）
-4. 在当前目录克隆代码并**本地构建**（不提供预构建镜像）
+4. 在当前目录克隆代码并**本地构建** 
 5. 自动生成 `.env`（服务密钥随机）。全新安装首次打开面板时设置管理员账号密码
+6. 自动清理Docker构建留下的缓存，减少磁盘占用
+7. 自动检测当前面板是否是宝塔或1panel并自动添加到流盾WAF的面板集成，方便导入站点、同步证书等
 
 安装完成后打开面板地址，设置管理员账号后即可使用，然后 [接入第一个站点](./first-site.md)。本机已有宝塔 / 1Panel 网站时，可 [从其他面板导入](./panel-import.md)。
 
@@ -79,6 +81,8 @@ curl -fsSL https://fswaf.top/install.sh | bash   #执行与安装相同的命令
 docker compose logs -f app   # 看日志
 docker compose restart app   # 重启
 docker compose down          # 停止（别加 -v，否则可能删数据）
+docker builder prune -f      # 清理无效的构建缓存
+docker image prune -f        # 清理无效的Dangling镜像
 ```
 
 以后升级也可继续用一键命令，或看 [升级与备份](./upgrade-backup.md)。
