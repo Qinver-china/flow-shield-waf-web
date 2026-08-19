@@ -3,5 +3,7 @@ docs/.vitepress/dist
 docs/.vitepress/cache
 .playwright-cli/
 .cursor/
+.agents/
+skills-lock.json
 .DS_Store
 *.log
