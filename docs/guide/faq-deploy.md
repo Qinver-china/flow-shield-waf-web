@@ -2,6 +2,23 @@
 
 相关教程：[快速开始](./quick-start.md) · [常规服务器部署（手动）](./deploy-server.md) · [宝塔部署（手动）](./baota.md)
 
+## 打开管理面板是 404
+
+启用了面板安全入口（`.env` 的 `PANEL_ENTRANCE`）时，未登录访问根路径或 `/login` 会返回 **404**。请使用安装结束时打印的地址，例如 `http://服务器IP:9000/随机入口`。入口可在系统设置「显示与联系」里查看；改 `.env` 后需重启 `app` 容器。留空该变量则恢复为未登录直接进入登录页。
+
+## 如何查看或修改安全地址？
+
+如果忘记后台安全入口，请找到流盾的安装目录，打开环境配置文件 `.env` 查看或修改 `PANEL_ENTRANCE`。一键安装常见目录为 `/www/wwwroot/flow-shield-waf`。
+
+```bash
+cd /www/wwwroot/flow-shield-waf   # 改成你的实际安装目录
+grep '^PANEL_ENTRANCE=' .env
+vi .env                           # 查看或修改 PANEL_ENTRANCE
+docker compose up -d app          # 修改后必须重启 app 才会生效
+```
+
+访问地址为 `http://服务器IP:面板端口/入口`。把该变量留空则关闭安全入口，未登录会直接进入登录页。若面板绑了域名并反向代理到 9000，入口路径同样是 `https://你的域名/入口`。
+
 ## 改了 EXTRA_LISTEN_PORTS 但端口没开出来
 
 `.env` 改完后要同步并重启：

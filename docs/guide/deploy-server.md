@@ -55,6 +55,7 @@ vi .env
 | 变量 | 默认 | 说明 |
 |------|------|------|
 | `PANEL_PORT` | `9000` | 面板端口 |
+| `PANEL_ENTRANCE` | 空 | 面板安全入口路径。留空则未登录直接进入登录页；设置后必须访问 `/{此值}` 才会打开登录页，其它未登录访问返回 404。一键全新安装会生成随机值 |
 | `WAF_HTTP_PORT` / `WAF_HTTPS_PORT` | `80` / `443` | 网站默认对外端口 |
 | `EXTRA_LISTEN_PORTS` | 空 | 站点自定义监听端口，逗号分隔，如 `9088`。改完后执行 `bash scripts/sync-compose-ports.sh && docker compose up -d`。不要手改 `docker-compose.override.yml`。只写在 `.env`，升级不会冲掉。示例见 [站点配置](./sites.md#custom-listen-ports) |
 | `WAF_ORIGIN_HOST_GATEWAY` | Linux `172.17.0.1`；macOS 建议 `host.docker.internal` | 回源到本机源站时的网关 |

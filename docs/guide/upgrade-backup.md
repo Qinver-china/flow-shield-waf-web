@@ -75,7 +75,7 @@ git pull origin main
 diff .env.example .env || true
 ```
 
-新版本若多了变量，补进你的 `.env`。不要随便改 `JWT_SECRET`、`WAF_CHALLENGE_SECRET`。
+新版本若多了变量，补进你的 `.env`。不要随便改 `JWT_SECRET`、`WAF_CHALLENGE_SECRET`。本版新增的 `PANEL_ENTRANCE` 在升级时会补空值，保持未登录直接进入登录页；若要启用安全入口，自行填写后重启 `app`。
 
 ### 4. 重新构建启动
 
