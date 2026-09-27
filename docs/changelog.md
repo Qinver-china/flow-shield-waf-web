@@ -10,6 +10,12 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
+## [未发布]
+
+### 变更
+
+- 官网域名由 `fswaf.top` 更换为 `fswaf.cn`
+
 ## [1.0.8] - 2026-09-15
 
 ### 新增

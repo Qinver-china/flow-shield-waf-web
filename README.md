@@ -2,7 +2,7 @@
 
 基于 [VitePress](https://vitepress.dev/) 的流盾 WAF（Flow Shield WAF）官方站点与文档。
 
-**官网：** [https://fswaf.top](https://fswaf.top)
+**官网：** [https://fswaf.cn](https://fswaf.cn)
 
 产品代码仓库：[Qinver-china/flow-shield-waf](https://github.com/Qinver-china/flow-shield-waf)
 

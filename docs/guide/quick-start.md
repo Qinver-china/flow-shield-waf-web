@@ -27,7 +27,7 @@ cd /www/wwwroot/flow-shield-waf         # 进入此目录
 推荐链接：
 
 ```bash
-curl -fsSL https://fswaf.top/install.sh | bash
+curl -fsSL https://fswaf.cn/install.sh | bash
 ```
 
 备用链接（GitHub）：
@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 
 ```bash
 cd /www/wwwroot/flow-shield-waf         # 进入项目目录   
-curl -fsSL https://fswaf.top/install.sh | bash   #执行与安装相同的命令即可
+curl -fsSL https://fswaf.cn/install.sh | bash   #执行与安装相同的命令即可
 ```
 
 ## 手动安装
