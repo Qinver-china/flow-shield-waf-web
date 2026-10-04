@@ -40,7 +40,7 @@ curl -fsSL https://raw.githubusercontent.com/Qinver-china/flow-shield-waf/main/i
 
 1. 检测操作系统与 Docker / Compose / Git（缺失时可自动安装；macOS 需自行安装并启动 Docker Desktop）
 2. 判断是**首次安装**还是**更新**（已有 `flowshield-waf-app` 容器或项目目录）
-3. 检查 `80` / `443`；若被 Nginx / 宝塔占用，可自动改 listen 端口（默认改到 `8080` / `4343`，可自定义）
+3. 检查 `80` / `443`；若被 Nginx / 宝塔占用，可自动改 listen 端口（默认改到 `8080` / `4343`，可自定义）。若检测到宝塔面板，还会把这些回源端口写入宝塔「安全 → 系统防火墙」
 4. 在当前目录克隆代码并**本地构建** 
 5. 自动生成 `.env`（服务密钥与面板安全入口随机）。全新安装需用脚本结束时打印的带入口地址打开面板，再设置管理员账号密码
 6. 自动清理Docker构建留下的缓存，减少磁盘占用

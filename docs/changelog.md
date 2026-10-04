@@ -10,7 +10,11 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
-## [未发布]
+## [1.0.9] - 2026-10-04
+
+### 新增
+
+- 一键安装检测到本机宝塔时，会把 Nginx 改写后的回源端口（如 `8080` / `4343`）自动写入宝塔「系统防火墙」；失败不阻断安装
 
 ### 变更
 
