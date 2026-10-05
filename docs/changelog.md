@@ -10,6 +10,12 @@ outline: deep
 
 完整源文件见主仓库 [`CHANGELOG.md`](https://github.com/Qinver-china/flow-shield-waf/blob/main/CHANGELOG.md)。
 
+## [1.0.10] - 2026-10-05
+
+### 新增
+
+- 内置自定义规则增加 5 条 WordPress 高危漏洞封堵（匿名 REST batch、author_exclude SQLi、pagename 路径穿越、Avada Fusion widget markup、超长注册用户名）；已部署环境升级后会按名称补种一次
+
 ## [1.0.9] - 2026-10-04
 
 ### 新增
